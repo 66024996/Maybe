@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Dropdown List</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .flex-container {
+            display: flex;
+        }
+
+        .left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body,
+        html {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .bill-details {
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            align-items: flex-start;
+            background: linear-gradient(to right, #2EA5E4 70%, #5AC5FD 100%);
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #0086CD;
+            border-radius: 8px;
+            width: 25%;
+            margin-bottom: 8px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .textarea-container {
+
+            display: flex;
+            width: 94%;
+            border-radius: 8px;
+            border: 1px solid #ffffff;
+            box-sizing: border-box;
+            padding: 8px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .textarea-container .left-column,
+        .textarea-container .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .textarea-container textarea {
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 150px;
+            border: none;
+            resize: none;
+            font-size: 16px;
+            box-sizing: border-box;
+            background: none;
+        }
+
+        .container {
+            position: relative;
+            width: 90%;
+            margin-top: 8px;
+        }
+
+        .payment-amount2 {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            display: flex;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .amount {
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            align-items: flex-start;
+            background: linear-gradient(to right, #2EA5E4 70%, #5AC5FD 100%);
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #0086CD;
+            border-radius: 8px;
+            width: 25%;
+            margin-bottom: 8px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .gradient-background {
+            position: absolute;
+            bottom: 0;
+            width: 50%;
+
+            background: linear-gradient(to bottom, #ffffff00, #76d4fa);
+            /* ปรับ gradient ตามที่คุณต้องการ */
+            z-index: 1;
+            /* ทำให้ gradient อยู่ด้านหลังเนื้อหา */
+        }
+
+        #disableHover {
+            opacity: 1;
+            /* ความโปร่งใสเริ่มต้น */
+            transition: opacity 0.3s ease;
+            /* การเปลี่ยนแปลงความโปร่งใส */
+            padding: 10px;
+
+            border-radius: 8px;
+            width: 200px;
+            text-align: center;
+        }
+
+        #disableHover.hidden {
+            opacity: 0;
+            /* ความโปร่งใสเมื่อซ่อน */
+        }
+
+
+        .graphic-background {
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #4a90e2;
+            clip-path: inset(10% 20% 30% 40%);
+            transform: rotate(115deg);
+            transform-origin: center;
+        }
+
+        .cont {
+            position: absolute;
+            bottom: -200px;
+            right: -220px;
+            width: 100px;
+            /* กำหนดขนาดตามที่ต้องการ */
+            height: 300px;
+            /* กำหนดขนาดตามที่ต้องการ */
+        }
+
+        .shape1 {
+            width: 35px;
+            height: 570px;
+            background-color: #004367;
+            /* สีฟ้า */
+            position: absolute;
+            bottom: -150px;
+            left: -330px;
+            transform: rotate(195deg);
+            z-index: 5;
+            clip-path: polygon(0 0, 100% 0, 100% 97%, 0% 100%, 0% 100%);
+        }
+
+        .shape2 {
+            width: 300px;
+            height: 350px;
+            background-color: #2EA5E4;
+            /* สีฟ้า */
+            position: absolute;
+            bottom: 0px;
+            right: 0;
+            transform: rotate(195deg);
+            z-index: 4;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 70% 100%, 0% 100%);
+        }
+
+        .shape3 {
+            width: 300px;
+            height: 600px;
+            background-color: #004367;
+            /* สีฟ้า */
+            position: absolute;
+            bottom: 0px;
+            right: 0;
+            transform: rotate(195deg);
+            z-index: 3;
+        }
+                /* อันนี้ลองกราฟเฉยๆ */
+        .bar-graph .year {
+            -webkit-animation: fade-in-text 2.2s 0.1s forwards;
+            -moz-animation: fade-in-text 2.2s 0.1s forwards;
+            animation: fade-in-text 2.2s 0.1s forwards;
+            opacity: 0;
+        }
+
+        .bar-graph-horizontal {
+            max-width: 380px;
+        }
+
+        .bar-graph-horizontal > div {
+            float: left;
+            margin-bottom: 8px;
+            width: 100%;
+        }
+
+        .bar-graph-horizontal .Electric-Bill {
+            float: left;
+            margin-top: 18px;
+            width: 50px;
+        }
+        .bar-graph-horizontal .Water-Bill {
+            float: left;
+            margin-top: 18px;
+            width: 50px;
+        }
+
+        .bar-graph-horizontal .bar {
+            border-radius: 3px;
+            height: 55px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+            width: 0;
+        }
+
+        .bar-graph-one .bar::after {
+            -webkit-animation: fade-in-text 2.2s 0.1s forwards;
+            -moz-animation: fade-in-text 2.2s 0.1s forwards;
+            animation: fade-in-text 2.2s 0.1s forwards;
+            color: #fff;
+            content: attr(data-payment);
+            font-weight: 700;
+            position: absolute;
+            right: 16px;
+            top: 17px;
+        }
+
+        .bar-graph-one .bar-one .bar {
+            background-color: #5292ac;
+            -webkit-animation: show-bar-one 1.2s 0.1s forwards;
+            -moz-animation: show-bar-one 1.2s 0.1s forwards;
+            animation: show-bar-one 1.2s 0.1s forwards;
+        }
+
+        .bar-graph-one .bar-two .bar {
+            background-color: #e06a3e;
+            -webkit-animation: show-bar-two 1.2s 0.2s forwards;
+            -moz-animation: show-bar-two 1.2s 0.2s forwards;
+            animation: show-bar-two 1.2s 0.2s forwards;
+        }
+
+
+        @-webkit-keyframes show-bar-one {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 69.6%;
+            }
+        }
+
+        @-webkit-keyframes show-bar-two {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 71%;
+            }
+        }
+
+        @-webkit-keyframes show-bar-three {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 74.7%;
+            }
+        }
+
+        @-webkit-keyframes show-bar-four {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 76.8%;
+            }
+        }
+
+        @-webkit-keyframes fade-in-text {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .navbar {
+            position: fixed;
+            overflow: hidden;
+            width: 100%;
+            top: 0;
+            background-color: #fdfdfd;
+            display: flex;
+            margin-right: 10px;
+            justify-content: space-between;
+            align-items: center;
+            color: rgb(10, 10, 10);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            height: 8%;
+        }
+
+        .navbar .left-nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            margin-left: 100px;
+        }
+
+        .navbar .left-nav a {
+            color: rgb(10, 10, 10);
+            text-decoration: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .navbar .left-nav a:hover {
+            background-color: #d3d3d3;
+            border-radius: 4px;
+        }
+
+        .navbar .right-nav a {
+            color: rgb(10, 10, 10);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+
+        .navbar .right-nav a:hover {
+            background-color: #d3d3d3;
+            border-radius: 4px;
+        }
+
+        .footer {
+            background-color: #004367;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            left: 0;
+            height: 3%;
+            z-index: 9000;
+        }
+
+        .footer .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer .footer-content p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .footer .footer-content a {
+            color: #00bcd4;
+            text-decoration: none;
+        }
+
+        .footer .footer-content a:hover {
+            text-decoration: underline;
+        }
+
+        .footer .footer-content .social-icons {
+            margin-top: 10px;
+        }
+
+        .footer .footer-content .social-icons a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        .footer .footer-content .social-icons a:hover {
+            color: #00bcd4;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="left-nav">
+            <a href="#home">Home</a>
+            <a href="#service">Service</a>
+            <a href="#feature">Feature</a>
+            <a href="#product">Product</a>
+            <a href="#faq">FAQ</a>
+        </div>
+        <div class="right-nav">
+            <a href="#signin">Sign In</a>
+            <a href="#signup" style="background-color: #186a99; color: #f1f1f1;">Sign Up</a>
+        </div>
+    </div>
+    <div class="cont">
+        <div class="shape1"></div>
+        <div class="shape2"></div>
+        <div class="shape3"></div>
+
+    </div>
+    <div style="height: 100%;">
+        <div class="flex-container" style="height: 100%;">
+            <div class="left" style="background-position: center;
+                background-repeat: no-repeat; 
+                width: 100%; 
+                height: 100vh; 
+                display: flex;
+                justify-content: center;
+                align-items: center;">
+                <div id="disableHover"
+                    style="width: 70%; display: flex; flex-direction: column; align-items: flex-start; z-index: 5;">
+                    <div class="bill-details">
+                        รายละเอียดห้องพัก
+                    </div>
+                    <div class="textarea-container" style="background-color: #ffffff;">
+                        <div class="left-column">
+                          <span>เลขที่ห้อง 1 ผู้อยู่อาศัย กนก แสงจันทร์</span>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="amount">
+                            ตรวจสอบใบแจ้งหนี้
+                        </div>
+                    </div>
+                    <div class="bill-details">
+                        รายละเอียดห้องพัก
+                    </div>
+                    <div class="textarea-container" style="background-color: #ffffff;">
+                        <div class="left-column">
+                          <span>- โต๊ะ: เครื่องแป้ง</span>
+                          <span>- ท่อน้ำ: ล้างจานตัน</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gradient-background"></div>
+            </div>
+            <div class="right" style="width: 100%; height: 100%; justify-content: center; align-items: Left; padding-left: 10%;">
+                <h2>สิงหาคม 2667</h2>
+                <section class="bar-graph bar-graph-horizontal bar-graph-one">
+                    <div class="bar-one">
+                      <span class="Water-Bill">ค่าน้ำ</span>
+                      <div class="bar" data-payment="200"></div>
+                    </div>
+                    <div class="bar-two">
+                      <span class="Electric-Bill">ค่าไฟ</span>
+                      <div class="bar" data-payment="300"></div>
+                    </div>
+                  </section>
+                <div class="gradient-background" style="right: 0; height: 15%;"></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Your Company. All rights reserved.</p>
+            <p>
+                <a href="#privacy">Privacy Policy</a> |
+                <a href="#terms">Terms of Service</a>
+            </p>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
